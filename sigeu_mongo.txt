@@ -1,0 +1,336 @@
+use ;
+
+db.createCollection("usuarios", {
+    "capped": false,
+    "validator": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "title": "usuarios",
+            "properties": {
+                "_id": {
+                    "bsonType": "objectId"
+                },
+                "codigo": {
+                    "bsonType": "string"
+                },
+                "nombre": {
+                    "bsonType": "string"
+                },
+                "email": {
+                    "bsonType": "string"
+                },
+                "rol": {
+                    "bsonType": "string"
+                },
+                "estado": {
+                    "bsonType": "string"
+                },
+                "fecha_registro": {
+                    "bsonType": "date"
+                },
+                "contraseñas": {
+                    "bsonType": "array",
+                    "additionalItems": true,
+                    "items": [
+                        {
+                            "bsonType": "objectId"
+                        },
+                        {
+                            "bsonType": "string"
+                        },
+                        {
+                            "bsonType": "string"
+                        },
+                        {
+                            "bsonType": "date"
+                        },
+                        {
+                            "bsonType": "bool"
+                        }
+                    ]
+                },
+                "estudiante": {
+                    "bsonType": "object",
+                    "properties": {
+                        "programa_id": {
+                            "bsonType": "objectId"
+                        },
+                        "semestre": {
+                            "bsonType": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "_id",
+                "codigo",
+                "nombre",
+                "email",
+                "rol",
+                "estado",
+                "fecha_registro"
+            ]
+        }
+    },
+    "validationLevel": "off",
+    "validationAction": "warn"
+});
+
+
+
+
+db.createCollection("facultades", {
+    "capped": false,
+    "validator": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "title": "facultades",
+            "properties": {
+                "_id": {
+                    "bsonType": "objectId"
+                },
+                "facultad_id": {
+                    "bsonType": "objectId"
+                },
+                "nombre": {
+                    "bsonType": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "_id",
+                "facultad_id",
+                "nombre"
+            ]
+        }
+    },
+    "validationLevel": "off",
+    "validationAction": "warn"
+});
+
+
+
+
+db.createCollection("programas", {
+    "capped": false,
+    "validator": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "title": "programas",
+            "properties": {
+                "_id": {
+                    "bsonType": "objectId"
+                },
+                "nombre": {
+                    "bsonType": "string"
+                },
+                "facultad_id": {
+                    "bsonType": "objectId"
+                },
+                "unidad_academica_id": {
+                    "bsonType": "objectId"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "_id",
+                "nombre",
+                "facultad_id",
+                "unidad_academica_id"
+            ]
+        }
+    },
+    "validationLevel": "off",
+    "validationAction": "warn"
+});
+
+
+
+
+db.createCollection("unidades_academicas", {
+    "capped": false,
+    "validator": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "title": "unidades_academicas",
+            "properties": {
+                "_id": {
+                    "bsonType": "objectId"
+                },
+                "nombre": {
+                    "bsonType": "string"
+                },
+                "facultad_id": {
+                    "bsonType": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "_id",
+                "nombre",
+                "facultad_id"
+            ]
+        }
+    },
+    "validationLevel": "off",
+    "validationAction": "warn"
+});
+
+
+
+
+db.createCollection("lugares", {
+    "capped": false,
+    "validator": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "title": "lugares",
+            "properties": {
+                "_id": {
+                    "bsonType": "objectId"
+                },
+                "nombre": {
+                    "bsonType": "string"
+                },
+                "tipo": {
+                    "bsonType": "string"
+                },
+                "capacidad": {
+                    "bsonType": "string"
+                },
+                "ubicación": {
+                    "bsonType": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "_id",
+                "nombre",
+                "tipo",
+                "capacidad"
+            ]
+        }
+    },
+    "validationLevel": "off",
+    "validationAction": "warn"
+});
+
+
+
+
+db.createCollection("eventos", {
+    "capped": false,
+    "validator": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "title": "eventos",
+            "properties": {
+                "_id": {
+                    "bsonType": "objectId"
+                },
+                "titulo": {
+                    "bsonType": "string"
+                },
+                "descripcion": {
+                    "bsonType": "string"
+                },
+                "tipo_evento": {
+                    "bsonType": "string"
+                },
+                "fecha_inicio": {
+                    "bsonType": "date"
+                },
+                "fecha_fin": {
+                    "bsonType": "date"
+                },
+                "estado": {
+                    "bsonType": "string"
+                },
+                "pdfAval": {
+                    "bsonType": "string"
+                },
+                "organizador": {
+                    "bsonType": "object",
+                    "properties": {
+                        "usuario_id": {
+                            "bsonType": "objectId"
+                        },
+                        "nombre": {
+                            "bsonType": "string"
+                        },
+                        "rol": {
+                            "bsonType": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "usuario_id",
+                        "nombre"
+                    ]
+                },
+                "lugar": {
+                    "bsonType": "object",
+                    "properties": {
+                        "lugar_id": {
+                            "bsonType": "objectId"
+                        },
+                        "nombre": {
+                            "bsonType": "string"
+                        },
+                        "tipo": {
+                            "bsonType": "string"
+                        },
+                        "capacidad": {
+                            "bsonType": "number"
+                        },
+                        "ubicacion": {
+                            "bsonType": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "lugar_id",
+                        "nombre",
+                        "tipo",
+                        "capacidad",
+                        "ubicacion"
+                    ]
+                },
+                "participantes": {
+                    "bsonType": "array",
+                    "additionalItems": true,
+                    "items": [
+                        {
+                            "bsonType": "objectId"
+                        },
+                        {
+                            "bsonType": "string"
+                        },
+                        {
+                            "bsonType": "string"
+                        },
+                        {
+                            "bsonType": "bool"
+                        },
+                        {
+                            "bsonType": "string"
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "titulo",
+                "tipo_evento",
+                "fecha_inicio",
+                "pdfAval",
+                "lugar",
+                "participantes"
+            ]
+        }
+    },
+    "validationLevel": "off",
+    "validationAction": "warn"
+});
